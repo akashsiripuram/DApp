@@ -7,6 +7,8 @@ import {
 } from "@solana/web3.js";
 import { useState } from "react";
 import { toast } from "sonner";
+import { Input } from "./components/ui/input";
+import { Button } from "./components/ui/button";
 
 function SendTokens() {
   const [toRecipient, setToRecipient] = useState("");
@@ -27,31 +29,30 @@ function SendTokens() {
     toast.success("Transaction sent successfully!");
   }
   return (
-    <div className="flex flex-col gap-2 w-1/3 p-4">
-      <h1 className="text-2xl font-bold">Send Tokens</h1>
-      <input
+    <div className="flex flex-col gap-2 p-4">
+      <h1 className="text-2xl font-bold">Send SOL</h1>
+
+      <Input
         type="text"
         className="px-2 py-1 focus:outline-none border-black border-[1px]"
         onChange={(e) => setToRecipient(e.target.value)}
-        placeholder="Recipient Public Key"
+        placeholder="Enter recipient's public key"
         value={toRecipient}
         name="toRecipient"
         required
       />
-      <input
+
+      <Input
         type="text"
         className="px-2 py-1 focus:outline-none border-black border-[1px]"
         onChange={(e) => setAmount(e.target.value)}
-        placeholder="Amount in SOL"
+        placeholder="Enter amount in SOL (e.g., 0.5)"
         value={amount}
         name="amount"
         required
       />
-      <button
-        className="cursor-pointer border-2 border-black py-1 px-3 rounded-2xl"
-        onClick={sendTokens}>
-        Send Tokens
-      </button>
+
+      <Button onClick={sendTokens}>Send Tokens</Button>
     </div>
   );
 }

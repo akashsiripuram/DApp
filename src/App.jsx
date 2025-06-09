@@ -11,29 +11,95 @@ import {
 } from "@solana/wallet-adapter-react-ui";
 import Airdrop from "./Airdrop";
 
-
 // Default styles that can be overridden by your app
 import "@solana/wallet-adapter-react-ui/styles.css";
-import ShowBalance  from "./ShowBalance";
+import ShowBalance from "./ShowBalance";
 import SendTokens from "./SendTokens";
 import { Toaster } from "sonner";
 import SignMessage from "./SignMessage";
 
+//shadcn styles
+import { AppWindowIcon, CodeIcon } from "lucide-react";
+import { Button } from "./components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "./components/ui/card";
+import { Input } from "./components/ui/input";
+import { Label } from "./components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
 function App() {
   return (
     <ConnectionProvider endpoint={"https://api.devnet.solana.com"}>
       <WalletProvider wallets={[]} autoConnect>
         <WalletModalProvider>
-          <Toaster/>
+          <Toaster />
           <div className="flex justify-end p-4 gap-2">
-          <WalletMultiButton />
-          <WalletDisconnectButton />
+            <WalletMultiButton />
+            <WalletDisconnectButton />
           </div>
+          
+          <div className="flex flex-col gap-6 items-center ">
             
-            <Airdrop /> 
-            <ShowBalance/>
-            <SendTokens/>
-            <SignMessage/>
+            <Tabs defaultValue="airdrop">
+              <div className="flex flex-row gap-4">
+               <ShowBalance />
+              <TabsList>
+               
+                <TabsTrigger value="airdrop">Airdrop</TabsTrigger>
+                <TabsTrigger value="sendtokens">Send Tokens</TabsTrigger>
+                <TabsTrigger value="signMessage">Sign Message</TabsTrigger>
+              </TabsList>
+              </div>
+              <TabsContent value="airdrop">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Request Airdrop</CardTitle>
+                    <CardDescription>
+                      Enter the amount of SOL you'd like to receive via airdrop.
+                      Click "Airdrop" to proceed.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="grid gap-6">
+                    <Airdrop />
+                  </CardContent>
+                </Card>
+              </TabsContent>
+              <TabsContent value="sendtokens">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Send Tokens</CardTitle>
+                    <CardDescription>
+                      Enter the recipient's public key and the amount of SOL
+                      you'd like to send. Click "Send Tokens" to proceed.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="grid gap-6">
+                    <SendTokens />
+                  </CardContent>
+                </Card>
+              </TabsContent>
+              <TabsContent value="signMessage">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Sign Message</CardTitle>
+                    <CardDescription>
+                      Enter a message below and sign it using your connected
+                      wallet. Useful for authentication or proving wallet
+                      ownership.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="grid gap-6">
+                    <SignMessage />
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            </Tabs>
+          </div>
         </WalletModalProvider>
       </WalletProvider>
     </ConnectionProvider>

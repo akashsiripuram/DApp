@@ -27,7 +27,7 @@ export default function ShowBalance() {
 
   return (
     <div>
-      <p>SOL Balance:</p> <div>{balance}</div>
+      {balance}
     </div>
   );
 }
