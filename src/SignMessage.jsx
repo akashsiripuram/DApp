@@ -9,10 +9,12 @@ function SignMessage() {
   const [message, setMessage] = useState("");
   const { publicKey, signMessage } = useWallet();
   const [signMessagee, setSignMessage] = useState();
-
+  const [loading,setLoading]=useState(false);
+  const button=loading?"Processing...":"Sign Message";
   const handleSignMessage = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const encodedMessage = new TextEncoder().encode(message);
       const signature = await signMessage(encodedMessage);
 
@@ -21,7 +23,9 @@ function SignMessage() {
       toast.success("Signed Message");
       setSignMessage(bs58.encode(signature));
     } catch (err) {
-      toast.error("Error signing message", err);
+      toast.error(`Error signing message: ${err.message}`);
+    }finally{
+      setLoading(false);
     }
   };
   return (
@@ -32,7 +36,7 @@ function SignMessage() {
         onChange={(e) => setMessage(e.target.value)}
         value={message}
       />
-      <Button onClick={handleSignMessage}>Sign Message</Button>
+      <Button onClick={handleSignMessage}>{button}</Button>
 
       {signMessagee && (
         <p className="break-all text-sm text-muted-foreground">

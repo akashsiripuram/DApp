@@ -35,77 +35,72 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
 function App() {
   return (
     <div className="bg-gray-200 min-w-screen min-h-screen">
-    <ConnectionProvider endpoint={"https://api.devnet.solana.com"}>
-      <WalletProvider wallets={[]} autoConnect>
-        <WalletModalProvider>
-          <Toaster />
-          <div className="flex justify-center p-4 gap-2">
-            <WalletMultiButton className="!bg-purple-600 !text-white !rounded-xl !px-4 !py-2 hover:!bg-purple-700" />
-            <WalletDisconnectButton className="!bg-red-500 !text-white !rounded-xl !px-4 !py-2 hover:!bg-red-600" />
-          </div>
-
-          <div className="flex flex-col gap-6 items-center ">
-            
-            <Tabs defaultValue="airdrop">
-              
-               <div className="flex flex-row justify-between">
-                <TabsList>
-                  <TabsTrigger value="airdrop">Airdrop</TabsTrigger>
-                  <TabsTrigger value="sendtokens">Send Tokens</TabsTrigger>
-                  <TabsTrigger value="signMessage">Sign Message</TabsTrigger>
-                </TabsList>
-                <ShowBalance/>
+      <ConnectionProvider endpoint={"https://api.devnet.solana.com"}>
+        <WalletProvider wallets={[]} autoConnect>
+          <WalletModalProvider>
+            <Toaster />
+            <div className="flex justify-center p-4 gap-2">
+              <WalletMultiButton className="!bg-purple-600 !text-white !rounded-xl !px-4 !py-2 hover:!bg-purple-700" />
+              <WalletDisconnectButton className="!bg-red-500 !text-white !rounded-xl !px-4 !py-2 hover:!bg-red-600" />
+            </div>
+            <div className="flex flex-col gap-6 items-center ">
+              <Tabs defaultValue="airdrop">
+                <div className="flex flex-row justify-between">
+                  <TabsList>
+                    <TabsTrigger value="airdrop">Airdrop</TabsTrigger>
+                    <TabsTrigger value="sendtokens">Send Tokens</TabsTrigger>
+                    <TabsTrigger value="signMessage">Sign Message</TabsTrigger>
+                  </TabsList>
+                  <ShowBalance />
                 </div>
-              
-               
-              <TabsContent value="airdrop">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Request Airdrop</CardTitle>
-                    <CardDescription>
-                      Enter the amount of SOL you'd like to receive via airdrop.
-                      Click "Airdrop" to proceed.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="grid gap-6">
-                    <Airdrop />
-                  </CardContent>
-                </Card>
-              </TabsContent>
-              <TabsContent value="sendtokens">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Send Tokens</CardTitle>
-                    <CardDescription>
-                      Enter the recipient's public key and the amount of SOL
-                      you'd like to send. Click "Send Tokens" to proceed.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="grid gap-6">
-                    <SendTokens />
-                  </CardContent>
-                </Card>
-              </TabsContent>
-              <TabsContent value="signMessage">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Sign Message</CardTitle>
-                    <CardDescription>
-                      Enter a message below and sign it using your connected
-                      wallet. Useful for authentication or proving wallet
-                      ownership.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="grid gap-6">
-                    <SignMessage />
-                  </CardContent>
-                </Card>
-              </TabsContent>
-            </Tabs>
-          </div>
-        </WalletModalProvider>
-      </WalletProvider>
-    </ConnectionProvider>
+                <TabsContent value="airdrop">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Request Airdrop</CardTitle>
+                      <CardDescription>
+                        Enter the amount of SOL you'd like to receive via
+                        airdrop. Click "Airdrop" to proceed.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="grid gap-6">
+                      <Airdrop />
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+                <TabsContent value="sendtokens">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Send Tokens</CardTitle>
+                      <CardDescription>
+                        Enter the recipient's public key and the amount of SOL
+                        you'd like to send. Click "Send Tokens" to proceed.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="grid gap-6">
+                      <SendTokens />
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+                <TabsContent value="signMessage">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Sign Message</CardTitle>
+                      <CardDescription>
+                        Enter a message below and sign it using your connected
+                        wallet. Useful for authentication or proving wallet
+                        ownership.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="grid gap-6">
+                      <SignMessage />
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+              </Tabs>
+            </div>
+          </WalletModalProvider>
+        </WalletProvider>
+      </ConnectionProvider>
     </div>
   );
 }

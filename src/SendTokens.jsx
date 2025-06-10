@@ -15,18 +15,26 @@ function SendTokens() {
   const [amount, setAmount] = useState("");
   const wallet = useWallet();
   const { connection } = useConnection();
-
+  const [loading, setLoading] = useState(false);
+  const button = loading ? "Processing" : "Send Tokens";
   async function sendTokens() {
-    const transaction = new Transaction();
-    transaction.add(
-      SystemProgram.transfer({
-        fromPubkey: wallet.publicKey,
-        toPubkey: new PublicKey(toRecipient),
-        lamports: amount * LAMPORTS_PER_SOL,
-      })
-    );
-    await wallet.sendTransaction(transaction, connection);
-    toast.success("Transaction sent successfully!");
+    try {
+      setLoading(true);
+      const transaction = new Transaction();
+      transaction.add(
+        SystemProgram.transfer({
+          fromPubkey: wallet.publicKey,
+          toPubkey: new PublicKey(toRecipient),
+          lamports: amount * LAMPORTS_PER_SOL,
+        })
+      );
+      await wallet.sendTransaction(transaction, connection);
+      toast.success("Transaction sent successfully!");
+    } catch (err) {
+      toast.error(`Error sending tokens : ${err.message}`);
+    } finally {
+      setLoading(false);
+    }
   }
   return (
     <div className="flex flex-col gap-2 p-4">
@@ -52,7 +60,7 @@ function SendTokens() {
         required
       />
 
-      <Button onClick={sendTokens}>Send Tokens</Button>
+      <Button onClick={sendTokens}>{button}</Button>
     </div>
   );
 }
