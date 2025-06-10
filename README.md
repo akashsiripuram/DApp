@@ -40,13 +40,6 @@ npm run dev
 
 ---
 
-## 🌐 Deployment
-
-You can deploy the app using platforms like **Vercel**, **Netlify**, or **Surge**.
-
-### Suggested Deployment Name/URL:
-
-**https://dapp-wallet.vercel.app**
 
 
 
