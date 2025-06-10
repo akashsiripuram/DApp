@@ -48,13 +48,14 @@ function App() {
             
             <Tabs defaultValue="airdrop">
               
-               
+               <div className="flex flex-row justify-between">
                 <TabsList>
                   <TabsTrigger value="airdrop">Airdrop</TabsTrigger>
                   <TabsTrigger value="sendtokens">Send Tokens</TabsTrigger>
                   <TabsTrigger value="signMessage">Sign Message</TabsTrigger>
                 </TabsList>
-                
+                <ShowBalance/>
+                </div>
               
                
               <TabsContent value="airdrop">
