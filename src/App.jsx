@@ -34,27 +34,29 @@ import { Label } from "./components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
 function App() {
   return (
+    <div className="bg-gray-200 min-w-screen min-h-screen">
     <ConnectionProvider endpoint={"https://api.devnet.solana.com"}>
       <WalletProvider wallets={[]} autoConnect>
         <WalletModalProvider>
           <Toaster />
-          <div className="flex justify-end p-4 gap-2">
-            <WalletMultiButton />
-            <WalletDisconnectButton />
+          <div className="flex justify-center p-4 gap-2">
+            <WalletMultiButton className="!bg-purple-600 !text-white !rounded-xl !px-4 !py-2 hover:!bg-purple-700" />
+            <WalletDisconnectButton className="!bg-red-500 !text-white !rounded-xl !px-4 !py-2 hover:!bg-red-600" />
           </div>
-          
+
           <div className="flex flex-col gap-6 items-center ">
             
             <Tabs defaultValue="airdrop">
-              <div className="flex flex-row gap-4">
-               <ShowBalance />
-              <TabsList>
+              
                
-                <TabsTrigger value="airdrop">Airdrop</TabsTrigger>
-                <TabsTrigger value="sendtokens">Send Tokens</TabsTrigger>
-                <TabsTrigger value="signMessage">Sign Message</TabsTrigger>
-              </TabsList>
-              </div>
+                <TabsList>
+                  <TabsTrigger value="airdrop">Airdrop</TabsTrigger>
+                  <TabsTrigger value="sendtokens">Send Tokens</TabsTrigger>
+                  <TabsTrigger value="signMessage">Sign Message</TabsTrigger>
+                </TabsList>
+                
+              
+               
               <TabsContent value="airdrop">
                 <Card>
                   <CardHeader>
@@ -103,6 +105,7 @@ function App() {
         </WalletModalProvider>
       </WalletProvider>
     </ConnectionProvider>
+    </div>
   );
 }
 
